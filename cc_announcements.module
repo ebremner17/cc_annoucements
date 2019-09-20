@@ -22,7 +22,7 @@ function cc_announcements_node_insert(NodeInterface $node) {
     // If we are changing to a published node, send emails.
     if ($node_status) {
 
-      //_ws_site_controller_send_emails('announcement_created');
+      _ws_site_controller_send_emails('announcement_created');
     }
   }
 }
@@ -50,7 +50,7 @@ function cc_announcements_node_update(NodeInterface $node) {
     // If we are changing to a published node, send emails.
     if (!$original_node_status && $node_status) {
 
-      //_ws_site_controller_send_emails('announcement_created');
+      _ws_site_controller_send_emails('announcement_created');
     }
   }
 }
