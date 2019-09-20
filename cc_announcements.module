@@ -1,0 +1,109 @@
+<?php
+
+use Drupal\node\NodeInterface;
+use Drupal\message\Entity\Message;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for node entities.
+ *
+ * Sends emails to users when changed to published.
+ */
+function cc_announcements_node_insert(NodeInterface $node) {
+
+  // If we are on a news, process it.
+  if ($node->type->getValue()[0]['target_id'] == 'cc_announcements') {
+
+    // The updated nodes status.
+    $node_status = $node->status->getValue()[0]['value'];
+
+    // If we are changing to a published node, send emails.
+    if ($node_status) {
+
+      //_ws_site_controller_send_emails('announcement_created');
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for node entities.
+ *
+ * Sends emails to users when changed to published.
+ */
+function cc_announcements_node_update(NodeInterface $node) {
+
+  // If we are on a news, process it.
+  if ($node->type->getValue()[0]['target_id'] == 'cc_announcements') {
+
+    // The updated nodes status.
+    $node_status = $node->status->getValue()[0]['value'];
+
+    if (isset($node->original->status->getValue()[0]['value']) && $node->original->status->getValue()[0]['value'] !== NULL) {
+      $original_node_status = $node->original->status->getValue()[0]['value'];
+    }
+    else {
+      $original_node_status = 0;
+    }
+
+    // If we are changing to a published node, send emails.
+    if (!$original_node_status && $node_status) {
+
+      //_ws_site_controller_send_emails('announcement_created');
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Disable title form element.
+ */
+function cc_announcements_form_node_cc_announcements_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
+
+  $config = \Drupal::config('cc_site_controller.sitesettings');
+
+  // Disable the title field.
+  $form['title']['#disabled'] = 'disabled';
+
+  // Set a default title, so that the node can be saved, this will be changed
+  // when the node is saved to use start and end dates.
+  $form['title']['widget'][0]['value']['#default_value'] = 'Announcements';
+
+  $start_date = strtotime(date('Y-m-d', strtotime("-1 " . $config->get('parade_night'))));
+  $form['field_cc_anc_start_date']['widget'][0]['value']['#default_value'] = DrupalDateTime::createFromTimestamp($start_date);
+
+  $end_date = strtotime(date('Y-m-d', strtotime("+1 " . $config->get('parade_night'))));
+  $form['field_cc_anc_end_date']['widget'][0]['value']['#default_value'] = DrupalDateTime::createFromTimestamp($end_date);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Disable title form element.
+ */
+function cc_announcements_form_node_cc_announcements_edit_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
+
+  // Disable the title field.
+  $form['title']['#disabled'] = 'disabled';
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function cc_announcements_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+
+  // If we are on a routine orders, set the title.
+  if ($entity->bundle() == 'cc_announcements') {
+
+    // The start date for the ROs, changing format.
+    $start_date = date('M j, Y', strtotime($entity->get('field_cc_anc_start_date')->value));
+
+    // The start date for the ROs, changing format.
+    $end_date = date('M j, Y', strtotime($entity->get('field_cc_anc_end_date')->value));
+
+    // Set the title based on the start and end dates.
+    $entity->setTitle('Announcements for ' . $start_date . ' to ' . $end_date);
+  }
+}

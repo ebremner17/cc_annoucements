@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cc_anc_start_date
+    - node.type.cc_announcements
+  module:
+    - datetime
+id: node.cc_announcements.field_cc_anc_start_date
+field_name: field_cc_anc_start_date
+entity_type: node
+bundle: cc_announcements
+label: 'Start date'
+description: 'Enter the start date of the announcements.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime
