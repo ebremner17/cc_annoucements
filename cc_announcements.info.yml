@@ -11,4 +11,5 @@ dependencies:
   - path
   - text
   - user
+  - cc_site_controller
 core_incompatible: false
