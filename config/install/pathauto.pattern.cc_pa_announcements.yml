@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: cc_pa_announcements
+label: Announcements
+type: 'canonical_entities:node'
+pattern: 'announcements/[node:title]'
+selection_criteria:
+  e16c3e8b-a503-44e1-98e4-7554eed941d7:
+    id: node_type
+    bundles:
+      cc_announcements: cc_announcements
+    negate: false
+    context_mapping:
+      node: node
+    uuid: e16c3e8b-a503-44e1-98e4-7554eed941d7
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -3,13 +3,14 @@ description: 'Announcements for the unit, automated messages will be sent when c
 type: module
 core: 8.x
 dependencies:
+  - cc_site_controller
   - datetime
   - entity_browser_block_layout
   - field
   - menu_ui
   - node
   - path
+  - pathauto
   - text
   - user
-  - cc_site_controller
 core_incompatible: false
