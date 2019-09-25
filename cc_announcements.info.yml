@@ -13,4 +13,5 @@ dependencies:
   - pathauto
   - text
   - user
+  - views
 core_incompatible: false
