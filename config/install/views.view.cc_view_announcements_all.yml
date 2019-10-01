@@ -382,21 +382,23 @@ display:
             label: ''
           granularity: day
           plugin_id: datetime
-      title: 'Announcements (All)'
-      header: {  }
-      footer: {  }
-      empty:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
+        field_cc_anc_end_date_value:
+          id: field_cc_anc_end_date_value
+          table: node__field_cc_anc_end_date
+          field: field_cc_anc_end_date_value
           relationship: none
           group_type: group
           admin_label: ''
-          empty: true
-          tokenize: false
-          content: 'There are no announcements at this time, please check back again at a later time.'
-          plugin_id: text_custom
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          granularity: day
+          plugin_id: datetime
+      title: 'Announcements (All)'
+      header: {  }
+      footer: {  }
+      empty: {  }
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
