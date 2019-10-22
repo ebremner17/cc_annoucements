@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall for Cadets Canada Announcements.
+ */
+
+/**
+ * Add file to announcements.
+ */
+function cc_announcements_update_8100() {
+
+  // Config files that have changed.
+  $imports = array(
+    'field.field.node.cc_announcements.field_cc_anc_file',
+    'field.storage.node.field_cc_anc_file',
+    'core.entity_form_display.node.cc_announcements.default',
+    'core.entity_view_display.node.cc_announcements.default',
+    'views.view.cc_view_announcements_all',
+  );
+
+  // Update the config.
+  _cc_site_controller_update_config('cc_announcements', $imports);
+}
