@@ -4,10 +4,12 @@ dependencies:
   config:
     - field.field.node.cc_announcements.body
     - field.field.node.cc_announcements.field_cc_anc_end_date
+    - field.field.node.cc_announcements.field_cc_anc_file
     - field.field.node.cc_announcements.field_cc_anc_start_date
     - node.type.cc_announcements
   module:
     - datetime
+    - file
     - text
     - user
 id: node.cc_announcements.default
@@ -30,6 +32,14 @@ content:
       format_type: cc_short_month_date_only
     third_party_settings: {  }
     type: datetime_default
+    region: content
+  field_cc_anc_file:
+    weight: 4
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
     region: content
   field_cc_anc_start_date:
     weight: 1

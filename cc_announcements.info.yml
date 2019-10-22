@@ -7,6 +7,7 @@ dependencies:
   - datetime
   - entity_browser_block_layout
   - field
+  - file
   - menu_ui
   - node
   - path

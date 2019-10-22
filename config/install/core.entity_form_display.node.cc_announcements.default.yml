@@ -4,10 +4,12 @@ dependencies:
   config:
     - field.field.node.cc_announcements.body
     - field.field.node.cc_announcements.field_cc_anc_end_date
+    - field.field.node.cc_announcements.field_cc_anc_file
     - field.field.node.cc_announcements.field_cc_anc_start_date
     - node.type.cc_announcements
   module:
     - datetime
+    - file
     - path
     - text
 id: node.cc_announcements.default
@@ -29,6 +31,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
+    region: content
+  field_cc_anc_file:
+    weight: 26
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
     region: content
   field_cc_anc_start_date:
     weight: 3
